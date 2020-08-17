@@ -28,7 +28,7 @@ const getOneById = async (req, res) => {
 
 // basic find specific item, return one
 const findOne = async (req, res) => {
-    const data = await Model.findOne({ "name": "bubbakkoo burrito" })
+    const data = await Model.findOne({ "key of query": "specific instance" })
     try {
         res.send(data)
     }

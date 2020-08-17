@@ -21,18 +21,18 @@ const getOneById = async (req, res) => {
         if (!data) res.status(404).send("No item found")
         res.status(200).send(data)
     }
-    catch {
+    catch (err) {
         res.status(500).send(err)
     }
 }
 
 // basic find specific item, return one
-const findOne = async(req, res) => {
-    const data = await Model.findOne({"key of query": "specific instance"})
+const findOne = async (req, res) => {
+    const data = await Model.findOne({ "name": "bubbakkoo burrito" })
     try {
         res.send(data)
     }
-    catch(err){
+    catch (err) {
         res.status(500).send(err)
     }
 }
@@ -63,6 +63,25 @@ const deleteOne = async (req, res) => {
     }
 }
 
+// basic delete many controller
+//      deletes all that match condition
+const deleteMany = async (req, res) => {
+    try {
+        await Model.deleteMany({ thisIsTheConditionKeyToReplace: "this is the condition value to replace" }, function (err, result) {
+            if (err) {
+                res.send(err);
+
+                res.status(200).send()
+            } else {
+                res.send(result)
+            }
+        })
+
+    }
+    catch (err) {
+        res.status(500).send(err)
+    }
+}
 
 
 // basic patch one controller
@@ -83,5 +102,6 @@ module.exports = {
     findOne,
     postData,
     deleteOne,
+    deleteMany,
     patchOne
 }
